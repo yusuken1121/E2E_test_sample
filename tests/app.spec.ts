@@ -14,4 +14,15 @@ test.describe("Homepage Navigation", () => {
     // 3. Assert (or 'expect') that this heading is visible on the page
     await expect(heading).toBeVisible();
   });
+
+  test("should navigate to Page A when the button is clicked", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: "Go to Page A" }).click();
+
+    const newHeading = page.getByRole("heading", { name: "Page A" });
+    await expect(newHeading).toBeVisible();
+    await expect(page).toHaveURL("/page-a");
+  });
 });
